@@ -1,12 +1,12 @@
-bb-commit-to-trello-comment
+gh-commit-to-trello-comment
 -----
-BitBucket web hook for commenting commit messages into Trello cards.
+GitHub web hook for commenting commit messages into Trello cards.
 
 ## Installation
 
 ### Install via composer
 ```
-composer create-project desktopsolutions/bbucket-to-trello
+
 ```
 *...or clone the repository.*
 
@@ -19,9 +19,10 @@ php cli-install.php
 If you can't use the command-line tool, copy `config-example.php` to `config.php` and edit the values within.
 
 ## Set up the Web Hook
-In your BitBucket repository go to settings -> web hooks. Create a new web hook with the URL of your installation. 
+In your GitHub repository go to settings -> Webhooks & Services -> Add webhook.
+Create a new web hook with the URL of your installation and use the application/json content type.
 
-*ex. http://mysite.com/bbucket-to-trello*
+*ex. http://mysite.com/gh-to-trello*
 
 ##Use and Enjoy!
 Put the URL of your relevant Trello card in your commit messages. The commit information will be added as a comment to that card (see below for an example).

@@ -13,7 +13,7 @@
  * be improving the comment messages, enhancing security, etc. please fork the repo and submit a pull request!
  *
  * The MIT License (MIT)
- * Copyright (c) 2016 Desktop Solutions Software
+ * Copyright (c) 2016 Andrew Natoli & Desktop Solutions Software
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
  * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
@@ -42,7 +42,7 @@ $trello = new Trello(TRELLO_API_KEY, null, TRELLO_API_TOKEN);
 $find = "https://trello.com/c/";
 $payload = json_decode($req_body);
 
-if(!isset($payload->push->changes[0]->commits)) {
+if(!isset($payload->commits)) {
     die("Invalid payload.");
 }
 
@@ -50,7 +50,7 @@ $total_commits_used = 0;
 $total_cards_used = 0;
 
 // Step two: Go through each commit and create the cards for each
-foreach ($payload->push->changes[0]->commits as $commit) {
+foreach ($payload->commits as $commit) {
 
     // Check the commit message for card references. Should be full URLs to card or the share URL.
     $msg = $commit->message;
@@ -72,7 +72,7 @@ foreach ($payload->push->changes[0]->commits as $commit) {
 
     if(count($cards) > 1) {
         $total_commits_used++;
-        $comment = "{$commit->type} {$commit->hash} by {$commit->author->user->display_name}\n------\n{$commit->message}\n------\n{$commit->links->html->href}";
+        $comment = "Commit {$commit->id} by {$commit->author->name}\n------\n{$commit->message}\n------\n{$commit->url}";
         foreach ($cards as $card) {
             $trello->post("cards/{$card}/actions/comments", array("text"=>$comment));
             $total_cards_used++;

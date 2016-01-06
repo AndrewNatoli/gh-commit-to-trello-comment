@@ -31,7 +31,7 @@ if(php_sapi_name() != "cli") {
 require "vendor/autoload.php";
 use Trello\Trello;
 
-print "\n\nBitBucket comments to Trello\n";
+print "\n\nBitBucket comments to Trello (GitHub Edition!)\n";
 
 if(file_exists("config.php")) {
    print "Delete config.php if you want to run this script again.\n";
